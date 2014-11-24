@@ -43,3 +43,13 @@ end
 end
     
 
+get '/news' do
+    require 'google-search'
+    search.query = "Mercer Football"
+    @results = Array.new
+        @results = Google::Search::News.new do |search|
+        search.size = :large
+        end.each { |item| @results.push item }
+    erb :news
+end
+
